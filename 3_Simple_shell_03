@@ -1,0 +1,14 @@
+#!/bin/bash
+
+while true; do
+    read -p "$(echo -e '\033[1m')> $(echo -e '\033[0m')" command args
+    if [ -z "$command" ]; then  # Handle empty input
+        continue
+    fi
+    if ! command -v "$command" >/dev/null 2>&1; then  # Check if the command exists
+        echo "Command not found: $command"
+        continue
+    fi
+    "$command" "$args"
+    echo "Command executed with status $?"
+done
